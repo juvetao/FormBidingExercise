@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <h1>Customers</h1>
+
+        </div>
+        <div th:if="${customers.isEmpty()}">
+            <p>No customer</p>
+        </div>
+        <div th:unless="${customers.isEmpty()}">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Email</th>
+                <th scope="col">Reg Date</th>
+                <th scope="col">Active</th>
+                <th scope="col">Street</th>
+                <th scope="col">Zip Code</th>
+                <th scope="col">Home Phone</th>
+                <th scope="col">Cell Phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer: ${customers}">
+                <td><span th:text="${customer.customerId}"></span></td>
+                <td><span th:text="${customer.email}"></span></td>
+                <td><span th:text="${customer.regDate}"></span></td>
+                <td><span th:text="${customer.active}"></span></td>
+                <td><span th:text="${customer.customerDetails.street}"></span></td>
+                <td><span th:text="${customer.customerDetails.zipCode}"></span></td>
+                <td><span th:text="${customer.customerDetails.homePhone}"></span></td>
+                <td><span th:text="${customer.customerDetails.cellPhone}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="container">
+            <a class="btn btn-success btn btn-sm" th:href="@{/customer/create}">Create A New Customer</a>
+        </div>
+    </div>
+</body>
+</html>
